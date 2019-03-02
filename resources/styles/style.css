@@ -9,7 +9,6 @@ html {
 }
 h1 {
     font-size: 1.4em;
-/*    font-weight: lighter;*/
 }
 .subheading {
     margin: 0.5em;
@@ -20,10 +19,9 @@ header {
     overflow: hidden;
 }
 footer, article{
-    animation-name: article;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    animation: article 1s ease 0s 1 normal forwards;
+    -webkit-animation: article 1s ease 0s 1 normal forwards;
+    -moz-animation: article 1s ease 0s 1 normal forwards;
 }
 article {
     max-width: 700px;
@@ -45,16 +43,16 @@ article p {
 }
 .avatar .me {
     position: absolute;
-    animation-name: base;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    -webkit-animation-delay: 0.15s; /* Chrome, Safari, Opera */
-    animation-delay: 0.15s;
+    animation: base 1s ease 0.15s 1 normal forwards;
+    -webkit-animation: base 1s ease 0.15s 1 normal forwards;
+    -moz-animation: base 1s ease 0.15s 1 normal forwards;
     transform: translate(0, 255px);
+    -webkit-transform: translate(0, 255px);
 }
 .avatar {
     -webkit-clip-path: url(#avatar-clip-path);
+    -moz-clip-path: url(#avatar-clip-path);
+    -ms-clip-path: url(#avatar-clip-path);
     clip-path: url(#avatar-clip-path);
     overflow: hidden;
     position: relative;
@@ -72,12 +70,9 @@ article p {
 }
 .avatar .me .eyebrow    { 
     background-image: url(../images/nicknack_eyebrow.png);  
-    animation-name: eyebrows;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    -webkit-animation-delay: 0.3s; /* Chrome, Safari, Opera */
-    animation-delay: 0.3s;
+    animation: eyebrows 1s ease 0.3s 1 normal forwards;
+    -webkit-animation: eyebrows 1s ease 0.3s 1 normal forwards;
+    -moz-animation: eyebrows 1s ease 0.3s 1 normal forwards;
 }
 .avatar .me .mouth      { 
     background-image: url(../images/nicknack_mouth_trim.png);
@@ -86,12 +81,9 @@ article p {
     left: 32%;
     top: 50%;
     transform-origin: top right;
-    animation-name: mouth;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    -webkit-animation-delay: 0.4s; /* Chrome, Safari, Opera */
-    animation-delay: 0.4s;
+    animation: mouth 1s ease 0.4s 1 normal forwards;
+    -webkit-animation: mouth 1s ease 0.4s 1 normal forwards;
+    -moz-animation: mouth 1s ease 0.4s 1 normal forwards;
 }
 .avatar .me .hand       { 
     background-image: url(../images/nicknack_hand.png);
@@ -100,14 +92,13 @@ article p {
     position: absolute;
     left: 0;
     top: 0;
-    fill: #000; /* #5a8b3a; */
+    fill: #000;
     stroke: #000;
     overflow: visible;
     transform-origin: 50% 90%;
-    animation-name: circle;
-    animation-duration: 0.3s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    animation: circle 0.3s ease 0.0s 1 normal forwards;
+    -webkit-animation: circle 0.3s ease 0.0s 1 normal forwards;
+    -moz-animation: circle 0.3s ease 0.0s 1 normal forwards;
 }
 a {
     color: white;
@@ -138,42 +129,38 @@ footer a {
         transform: translate(0, 0px);
         opacity: 1;}
 }
+
 @-webkit-keyframes circle {
-    from {    transform: scale(0,0);}
+    from {transform: scale(0,0);}
     to {transform: scale(1,1);}
 } 
-
-/* Standard syntax */ 
 @keyframes circle {
     from {transform: scale(0,0);}
     to {transform: scale(1,1);}
 }
+
 @-webkit-keyframes eyebrows {
     from {transform: translate(0, 10px);}
     to {transform: translate(0, 0px);}
 } 
-
-/* Standard syntax */ 
 @keyframes eyebrows {
     from {transform: translate(0, 10px);}
     to {transform: translate(0, 0px);}
 }
+
 @-webkit-keyframes mouth {
     from {transform: rotate(-18deg);}
     to {transform: rotate(0deg);}
 } 
-
-/* Standard syntax */ 
 @keyframes mouth {
     from {transform: rotate(-18deg);}
     to {transform: rotate(0deg);}
 }
+
 @-webkit-keyframes base {
     from {transform: translate(0, 250px);}
     to {transform: translate(0, 0px);}
 } 
-
-/* Standard syntax */ 
 @keyframes base {
     from {transform: translate(0, 250px);}
     to {transform: translate(0, 0px);}

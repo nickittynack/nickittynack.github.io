@@ -1,0 +1,180 @@
+html {
+    background-color: #2980B9;
+    color: #fff;
+    line-height: 1;
+    font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.02em;
+}
+h1 {
+    font-size: 1.4em;
+/*    font-weight: lighter;*/
+}
+.subheading {
+    margin: 0.5em;
+}
+header {
+    margin-top: 10%;
+    text-align: center;
+    overflow: hidden;
+}
+footer, article{
+    animation-name: article;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+article {
+    max-width: 700px;
+    padding: 0 10px;
+    margin: auto;
+    margin-top: 1em;
+    line-height: 1.2em;
+}
+article p {
+    margin-bottom: 1em;
+}
+.avatar-holder, .avatar, .avatar .me, .avatar .me > div {
+    width: 136px;
+    height: 256px;
+}
+.avatar-holder {
+    position: relative;
+    display: inline-block;
+}
+.avatar .me {
+    position: absolute;
+    animation-name: base;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.15s; /* Chrome, Safari, Opera */
+    animation-delay: 0.15s;
+    transform: translate(0, 255px);
+}
+.avatar {
+    -webkit-clip-path: url(#avatar-clip-path);
+    clip-path: url(#avatar-clip-path);
+    overflow: hidden;
+    position: relative;
+}
+.avatar .me > div {
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+}
+.avatar-holder .circle{
+    position: absolute;
+}
+.avatar .me .base       { 
+    background-image: url(../images/nicknack_base.png);
+}
+.avatar .me .eyebrow    { 
+    background-image: url(../images/nicknack_eyebrow.png);  
+    animation-name: eyebrows;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.3s; /* Chrome, Safari, Opera */
+    animation-delay: 0.3s;
+}
+.avatar .me .mouth      { 
+    background-image: url(../images/nicknack_mouth_trim.png);
+    width: 28px; 
+    height: 21px;
+    left: 32%;
+    top: 50%;
+    transform-origin: top right;
+    animation-name: mouth;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.4s; /* Chrome, Safari, Opera */
+    animation-delay: 0.4s;
+}
+.avatar .me .hand       { 
+    background-image: url(../images/nicknack_hand.png);
+}
+#circle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    fill: #000; /* #5a8b3a; */
+    stroke: #000;
+    overflow: visible;
+    transform-origin: 50% 90%;
+    animation-name: circle;
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+a {
+    color: white;
+    -webkit-transition: background 0.5s, color 0.5s; /* Safari */
+    transition: background 0.5s, color 0.5s;
+}
+a:hover {
+    cursor: pointer;
+    background: white;
+    color: #2980B9;
+    text-decoration: none;
+}
+footer {
+    font-size: 0.8em;
+    text-align: center;
+    padding-top: 1em;
+    line-height: 1.2em;
+    padding-bottom: 50px;
+}
+footer a {
+    text-decoration: none;
+}
+@keyframes article {
+    from {    
+        transform: translate(0, 20px);
+        opacity: 0;}
+    to {
+        transform: translate(0, 0px);
+        opacity: 1;}
+}
+@-webkit-keyframes circle {
+    from {    transform: scale(0,0);}
+    to {transform: scale(1,1);}
+} 
+
+/* Standard syntax */ 
+@keyframes circle {
+    from {transform: scale(0,0);}
+    to {transform: scale(1,1);}
+}
+@-webkit-keyframes eyebrows {
+    from {transform: translate(0, 10px);}
+    to {transform: translate(0, 0px);}
+} 
+
+/* Standard syntax */ 
+@keyframes eyebrows {
+    from {transform: translate(0, 10px);}
+    to {transform: translate(0, 0px);}
+}
+@-webkit-keyframes mouth {
+    from {transform: rotate(-18deg);}
+    to {transform: rotate(0deg);}
+} 
+
+/* Standard syntax */ 
+@keyframes mouth {
+    from {transform: rotate(-18deg);}
+    to {transform: rotate(0deg);}
+}
+@-webkit-keyframes base {
+    from {transform: translate(0, 250px);}
+    to {transform: translate(0, 0px);}
+} 
+
+/* Standard syntax */ 
+@keyframes base {
+    from {transform: translate(0, 250px);}
+    to {transform: translate(0, 0px);}
+}

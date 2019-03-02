@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+		<html>
+		<head>
+			<meta charset='utf-8'>
+			<title>HTML Css</title>
+			<meta name='description' content='An outline of how to style a website.'>
+			<link rel='stylesheet' type='text/css' href='style/styles.css'>
+			<link href='libs/codemirror/codemirror.css' type='text/css' rel='stylesheet' />
+			<link href='libs/prettify/prettify.css' type='text/css' rel='stylesheet' />
+			<meta name='viewport' content='initial-scale = 1.0,maximum-scale = 1.0'>
+			<!--[if lt IE 9]>
+			<script src='http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
+			<![endif]-->
+		</head>
+		<body onload='prettyPrint()'>
+	<header>
+	 	<h1>HTML Cheat Sheet</h1>
+	 	<nav>
+	 		<ul><li ><a href='./'>Intro</a></li><li ><a href='basics'>Basics</a></li><li ><a href='lists'>Lists</a></li><li ><a href='tables'>Tables</a></li><li ><a href='images'>Images</a></li><li ><a href='links'>Links</a></li><li ><a href='quiz'>Quiz</a></li><li class='active'><a href='css'>CSS</a></li><li ><a href='js'>JS</a></li>	</ul>
+	 	</nav>
+ 	</header>
+<section>
+
+
+<h2>Styling with CSS</h2><div class='jumpmenu'><ul><li class='contents'>Contents</li><li><a href='#Overview'>Overview</a></li><li><a href='#Linking+CSS'>Linking CSS</a></li><li><a href='#Selectors'>Selectors</a></li><li><a href='#Properties+and+Values'>Properties and Values</a></li></ul></div>
+
+<h3 id='Overview'>Overview</h3>
+
+<p>Cascading Style Sheets (CSS) are used to make your site look pretty. The gist of it is that we specify elements and what styling we want them to have. To do this we need a special way of writting our rules.</p>
+
+<p>In the example below I've first given you an example of the structure of these rules, then given an actual example. We will explain the terms: selector, property and value next, but try and figure them out just from the example!</p>
+
+
+<style>.blockNum_0 > div > div > 
+selector {
+    property: value;
+}.blockNum_0 > div > div > 
+
+div {
+    background-color: green;
+}.blockNum_0 > div > div > 
+
+</style>
+<div class='code blockNum_0'>
+	<div>
+		
+<p class='title'>CSS</p>
+<pre class='prettyprint lang-css'>
+selector {
+    property: value;
+}
+
+div {
+    background-color: green;
+}
+
+</pre>
+
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>
+&lt;div&gt;Style me!&lt;/div&gt;
+</pre>
+	</div>
+	<div>
+		<p class='title'>RESULT</p>
+		<div>
+<div>Style me!</div>
+</div>
+	</div>
+</div>
+
+<p>A <em>selector</em> is kind of like a search term, it's what we use to specify the element we want to style. More on those in a bit. A <em>property</em> is mearly the thing you want to change about that element, for example the background-color, color or margin. Lastly we have the value for that property, so this could be a color like green or red, or a more numerical value like 10px or 50% depending on the property.</p>
+
+<p>Note the curly braces {} and the semi colons, these are necessary! If you put them in the wrong places you might get a very funky looking website.</p>
+
+<h3 id='Linking+CSS'>Linking CSS</h3>
+
+<p>So before we continue we will run through how we can get CSS working on your site. There's a few different ways to do it but we are only concerned with the <em>proper</em> way! By now you should have some HTML files, your CSS is going to be a completely different file. So go in to your text editor and save a blank file called 'awesome.css', if you're stuck (or lazy) just <a href="awesome.css">download my awesome.css</a> you can also grab the <a href="awesome.html">awesome.html</a> too.</p>
+
+<p>Now we want to link this awesome.css file to your site. You need to add a <em>LINK</em> tag to the HEAD of your page, so your final page will look something like:</p>
+
+
+<div class='code smallcode'>
+	<div>
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="stylesheet" type="text/css" href="awesome.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        .. Amazing stuff here ..
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+	</div>
+</div>
+
+<p>You'll know if it worked as your background will turn blue. If that hasn't worked, make sure you've put your link tag in the right place.</p>
+
+<h3 id='Selectors'>Selectors</h3>
+
+<p>So we have a few different types of selectors.</p>
+
+<h4>Element / Tag</h4>
+
+<p>We can select things just based on their tag, eg p, b or table tags.</p>
+
+
+<style>.blockNum_2 > div > div > 
+p {
+    background-color: green;
+}.blockNum_2 > div > div > 
+
+</style>
+<div class='code blockNum_2'>
+	<div>
+		
+<p class='title'>CSS</p>
+<pre class='prettyprint lang-css'>
+p {
+    background-color: green;
+}
+
+</pre>
+
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>
+&lt;p&gt;I'm styled with an element selector!&lt;/p&gt;
+</pre>
+	</div>
+	<div>
+		<p class='title'>RESULT</p>
+		<div>
+<p>I'm styled with an element selector!</p>
+</div>
+	</div>
+</div>
+
+<h4>Class</h4>
+
+<p>We can style things by giving them a class attribute. Notice we now have to put a dot in front of our class name so that your browser knows to look for a class called tute rather than a tag called tute.</p>
+
+
+<style>.blockNum_3 > div > div > 
+.tute {
+    background-color: yellow;
+}.blockNum_3 > div > div > 
+
+</style>
+<div class='code blockNum_3'>
+	<div>
+		
+<p class='title'>CSS</p>
+<pre class='prettyprint lang-css'>
+.tute {
+    background-color: yellow;
+}
+
+</pre>
+
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>
+&lt;p class='tute'&gt;I'm styled with a class selector!&lt;/p&gt;
+</pre>
+	</div>
+	<div>
+		<p class='title'>RESULT</p>
+		<div>
+<p class='tute'>I'm styled with a class selector!</p>
+</div>
+	</div>
+</div>
+
+<h4>Identifier</h4>
+
+<p>Lastly we have identifiers, I'd discourage their usage but for the sake of completeness here it is! We use a hash this time to tell the browser to look for an id rather than a tag or class.</p>
+
+
+<style>.blockNum_4 > div > div > 
+#bob {
+    background-color: pink;
+}.blockNum_4 > div > div > 
+
+</style>
+<div class='code blockNum_4'>
+	<div>
+		
+<p class='title'>CSS</p>
+<pre class='prettyprint lang-css'>
+#bob {
+    background-color: pink;
+}
+
+</pre>
+
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>
+&lt;p id='bob'&gt;I'm styled with an id selector!&lt;/p&gt;
+</pre>
+	</div>
+	<div>
+		<p class='title'>RESULT</p>
+		<div>
+<p id='bob'>I'm styled with an id selector!</p>
+</div>
+	</div>
+</div>
+
+<h3 id='Properties+and+Values'>Properties and Values</h3>
+
+<p>Here's a breakdown and example of some of the frequently used properties I use.</p>
+
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>Some Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>background-color</td>
+  <td>blue, pink, red, green, #00000</td>
+</tr>
+<tr>
+  <td>color</td>
+  <td>blue, pink, red, green, #00000</td>
+</tr>
+<tr>
+  <td>margin</td>
+  <td>5px, 10px, 20%</td>
+</tr>
+<tr>
+  <td>padding</td>
+  <td>5px, 10px, 20%</td>
+</tr>
+<tr>
+  <td>border</td>
+  <td>5px solid pink</td>
+</tr>
+<tr>
+  <td>font-family</td>
+  <td>Arial, Times, Helvetica, Courier</td>
+</tr>
+<tr>
+  <td>font-size</td>
+  <td>5px, 10px, 20%</td>
+</tr>
+<tr>
+  <td>line-height</td>
+  <td>5px, 10px, 20%</td>
+</tr>
+</tbody>
+</table>
+
+<p>Here's a neat <a href="http://www.colorpicker.com/">color picker</a> which you can use for background-color or color values. This is not a complete list of properties! Use Google to find you more!</p>
+
+
+<style>.blockNum_5 > div > div > 
+div {
+    background-color: pink;
+    border: 5px solid green;
+    font-family: Courier;
+    margin: 10px;
+}.blockNum_5 > div > div > 
+.tute {
+    background-color: yellow;
+    border: 10px dotted black;
+    font-size: 10px;
+    padding: 10px;
+}.blockNum_5 > div > div > 
+
+</style>
+<div class='code blockNum_5'>
+	<div>
+		
+<p class='title'>CSS</p>
+<pre class='prettyprint lang-css'>
+div {
+    background-color: pink;
+    border: 5px solid green;
+    font-family: Courier;
+    margin: 10px;
+}
+.tute {
+    background-color: yellow;
+    border: 10px dotted black;
+    font-size: 10px;
+    padding: 10px;
+}
+
+</pre>
+
+		<p class='title'>HTML</p>
+		<pre class='prettyprint lang-html'>
+&lt;div&gt;Tag selector&lt;/div&gt;
+&lt;p class='tute'&gt;Class selector!&lt;/p&gt;
+</pre>
+	</div>
+	<div>
+		<p class='title'>RESULT</p>
+		<div>
+<div>Tag selector</div>
+<p class='tute'>Class selector!</p>
+</div>
+	</div>
+</div>
+
+<p>Again just go and experiment! Good luck making some nice looking pages!</p>
+
+</section>
+<footer>
+			<p class='updated'>Last updated: 2014-08-14, <a href='changelog'>View Changelog</a>
+			<p>Copyright 2014 - Nick Reynolds</p>
+			<p><a href='../sitemap.xml'>Site Map</a></p>
+			</footer>
+			<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-53252501-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+<script type='text/javascript' src='libs/prettify/prettify.js'></script>
+</body>
+</html>

@@ -1,204 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-  <loc>https://nicknack.dev/</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/basics</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/lists</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/tables</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/images</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/links</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/quiz</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/css</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/js</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/page1.html</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/changelog</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/01%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/01%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/01%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/02%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/02%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/02%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/03%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/03%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/03%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/A01%20Specification.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/04%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/04%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/05%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/05%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/05%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/06%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/06%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/06%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/A02%20Specification.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/07%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/07%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/08%20Slides.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/08%20Worksheet.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/08%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/python/files/09%20Practical.pdf</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://nicknack.dev/html/awesome.html</loc>
-  <lastmod>2019-03-02T21:20:33+00:00</lastmod>
-  <priority>0.51</priority>
-</url>
-
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-04-03T19:18:22+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/django-orm-security/</loc>
+    <lastmod>2021-04-03T19:18:22+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/why-graphql-why-apollo/</loc>
+    <lastmod>2021-04-03T19:18:22+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2020-04-02T09:00:00+10:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
 </urlset>

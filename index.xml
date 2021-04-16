@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nicknack.dev</title>
+    <link>/</link>
+    <description>Recent content on nicknack.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Apr 2021 19:18:22 +1100</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Protecting Django Models</title>
+      <link>/django-orm-security/</link>
+      <pubDate>Sat, 03 Apr 2021 19:18:22 +1100</pubDate>
+      
+      <guid>/django-orm-security/</guid>
+      <description>How do you prevent manual GraphQL traversals to sensitive data? How do you prevent accidental exposure of data to the wrong people?
+Making sure the right people have access to your data is crucial in this day and age. We use Django and Graphene on our backend to deliver content via GraphQL. This exposed some problems, in traditional REST (or django views or DRF) you would lock down endpoints and serve only what is required but with GraphQL the frontend decides what it needs.</description>
+    </item>
+    
+    <item>
+      <title>Why GraphQL? Why Apollo?</title>
+      <link>/why-graphql-why-apollo/</link>
+      <pubDate>Sat, 03 Apr 2021 19:18:22 +1100</pubDate>
+      
+      <guid>/why-graphql-why-apollo/</guid>
+      <description>How and why did we end up using GraphQL and Apollo? The tech sphere is obsessed with the latest and greatest tools - no we haven&amp;rsquo;t got Rust in our codebase&amp;hellip;yet!
+Working in healthcare gives you a slightly different lens, you want to use reasonably well established tools balancing Boring Technology &amp;hellip; with some experimentation in less critical infrastructure areas.
+Our frontend data-fetching and state layer is a prime example of an area that we need to be robust and consistent - we also can&amp;rsquo;t afford to migrate it to the latest hotness every few months.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 02 Apr 2020 09:00:00 +1000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I focus on architecting, building, testing, deploying, and maintaining software solutions in the healthcare space. Currently, I&amp;rsquo;m working at GenesisCare, the world&amp;rsquo;s largest private cancer care company - building doctor, staff, and patient-facing experiences. I manage a team of ~15 devs to deliver world-class, global solutions.
+This blog will cover a few technical oddities that I run into at work and outside of work.
+Opinions expressed are solely my own and do not express the views or opinions of my employer.</description>
+    </item>
+    
+  </channel>
+</rss>

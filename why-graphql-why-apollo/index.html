@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Why GraphQL? Why Apollo? - nicknack.dev</title>
+    
+    <meta name="description" content="How and why did we end up using GraphQL and Apollo? The tech sphere is obsessed with the latest and greatest tools - no we haven&rsquo;t got Rust in our codebase&hellip;yet!
+Working in healthcare gives you a slightly different lens, you want to use reasonably well established tools balancing Boring Technology &hellip; with some experimentation in less critical infrastructure areas.
+Our frontend data-fetching and state layer is a prime example of an area that we need to be robust and consistent - we also can&rsquo;t afford to migrate it to the latest hotness every few months.">
+    <meta name="author" content="">
+    
+    <link href="/an-old-hope.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+    <link href="/custom.css" rel="stylesheet">
+    
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="generator" content="Hugo 0.69.0" />
+    
+    
+  </head>
+  <body class="single dark">
+    <header class="header">
+      <nav class="nav">
+        <div class="hero"></div>
+        <p class="logo"><a href="/">nicknack.dev</a></p>
+        <ul class="menu">
+          <li>
+            <a href="/about/">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">Why GraphQL? Why Apollo?</h1>
+    <div class="post-meta">April 3, 2021</div>
+  </header>
+  <div class="post-content"><p>How and why did we end up using GraphQL and Apollo?
+The tech sphere is obsessed with the latest and greatest tools - no we haven&rsquo;t got Rust in our codebase&hellip;yet!</p>
+<p>Working in healthcare gives you a slightly different lens, you want to use reasonably well established tools balancing <a href="http://mcfunley.com/choose-boring-technology">Boring Technology</a> &hellip; with some experimentation in less critical infrastructure areas.</p>
+<p>Our frontend data-fetching and state layer is a prime example of an area that we need to be robust and consistent - we also can&rsquo;t afford to migrate it to the latest hotness every few months.</p>
+<h2 id="why-graphql">Why GraphQL</h2>
+<p>REST with Redux/Sagas and <code>fetch</code> felt like an over complication, we were essentially maintaining two different structures of our data - one in redux and one on the backend.
+This complicated saving and transformations.
+It was also difficult for developers to keep a mental model of the reducers, what they contained, when they needed to be refreshed, which actions refreshed them &hellip; and so on!</p>
+<h3 id="relay">Relay</h3>
+<p>When we started scoping out a new project we investigated what was happening in this space, GraphQL had taken off and had stable libraries in multiple frameworks, namely Relay and Apollo.
+After doing some proof of concepts we decided to back Relay, the interface seemed straightforward enough to implement and it checked off the usual CRUD requirements.</p>
+<p>The next year was frought with painful caching issues, complex constructed queries and nonsensical optimistic mutations.
+Luckily for the team that project ended up plateauing and moving into BAU.</p>
+<h3 id="apollo">Apollo</h3>
+<p>Our next project was to be longer term, we PoC&rsquo;ed out Apollo with some of the learnings of pain points from Relay.
+Neither library seemed to handle optimistic updates that added new nodes + modifying those nodes before they have synced and received &ldquo;real DB identifiers&rdquo;, though we accepted that and moved forward.</p>
+<p>Apollo has served our needs well adding and exposing new data to the frontend is easy, if it&rsquo;s already on the model our frontend devs don&rsquo;t have to touch backend code!
+We don&rsquo;t have to put in additional work to sync our backend and frontend state - the data models persist throughout the stack.
+Most of our technical debt comes from not fragmenting out queries to the right degree and mutations that have been abstracted out to support things like dynamic autosave on fields.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Most people knee-jerk when they see GraphQL and want to move back to REST, I think a lot of this is inertia.
+GraphQL certainly doesn&rsquo;t solve all problems but not having to consciously sync state and maintain reducers is a worthwhile trade off.</p>
+</div>
+  
+</article></main>
+<footer class="footer">
+  <span>&copy; 2021 <a href="/">nicknack.dev</a></span>
+  <span>&middot;</span>
+  <span>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</span>
+  <span>&middot;</span>
+  <span>Theme️ <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper</a></span>
+</footer>
+<script src="/highlight.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>
+

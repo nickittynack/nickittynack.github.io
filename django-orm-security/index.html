@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Protecting Django Models - nicknack.dev</title>
+    
+    <meta name="description" content="How do you prevent manual GraphQL traversals to sensitive data? How do you prevent accidental exposure of data to the wrong people?
+Making sure the right people have access to your data is crucial in this day and age. We use Django and Graphene on our backend to deliver content via GraphQL. This exposed some problems, in traditional REST (or django views or DRF) you would lock down endpoints and serve only what is required but with GraphQL the frontend decides what it needs.">
+    <meta name="author" content="">
+    
+    <link href="/an-old-hope.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+    <link href="/custom.css" rel="stylesheet">
+    
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="generator" content="Hugo 0.69.0" />
+    
+    
+  </head>
+  <body class="single dark">
+    <header class="header">
+      <nav class="nav">
+        <div class="hero"></div>
+        <p class="logo"><a href="/">nicknack.dev</a></p>
+        <ul class="menu">
+          <li>
+            <a href="/about/">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">Protecting Django Models</h1>
+    <div class="post-meta">April 3, 2021</div>
+  </header>
+  <div class="post-content"><p>How do you prevent manual GraphQL traversals to sensitive data? How do you prevent accidental exposure of data to the wrong people?</p>
+<p>Making sure the right people have access to your data is crucial in this day and age.
+We use Django and Graphene on our backend to deliver content via <a href="/why-graphql-why-apollo/" title="Why GraphQL? Why Apollo?">GraphQL</a>.
+This exposed some problems, in traditional REST (or django views or <a href="https://www.django-rest-framework.org/">DRF</a>) you would lock down endpoints and serve <em>only</em> what is required but with GraphQL the frontend decides what it needs.
+This flexible layer is great for development but not great for security.</p>
+<h2 id="using-decorators">Using Decorators</h2>
+<p>The easy approach is to decorate any resolvers in Graphene.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()</code></pre></div></p>
+<p>However, what if doctors can only access appointments in their state?
+I&rsquo;ll simplify the access pattern.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)</code></pre></div>
+<p>Okay we have now protected our appointments resolver&hellip; in one place.
+A few months from then a developer comes along and adds a resolver for an individual appointment.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)
+
+<span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointment</span>(context, id):
+    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>id)</code></pre></div>
+<p>Our doctor and nurse roles can now access any appointment provided they know the identifier.</p>
+<h2 id="using-the-orm">Using the ORM</h2>
+<p>Django exposes a few functions that we can play with to override resulting sets.
+Overriding at this lower level gives us a few benefits:</p>
+<ul>
+<li>Assurance against forgetting to annotate, people make mistakes</li>
+<li>You&rsquo;re protected regardless of how the objects are accessed, e.g. the admin panel, REST endpoints</li>
+</ul>
+<h3 id="how-does-it-work">How does it work?</h3>
+<p>We use the <a href="https://pypi.org/project/django-crequest/"><code>django-crequest</code></a> library which gives us access to the requesting user which is abstracted away by the time you get to the ORM.
+We then override <code>get_queryset</code> to inject our own filtering logic before the ORM can return objects.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> crequest.middleware <span style="color:#f92672">import</span> CrequestMiddleware
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PermissionManager</span>(models<span style="color:#f92672">.</span>Manager):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+        results <span style="color:#f92672">=</span> super()<span style="color:#f92672">.</span>get_queryset()
+        current_request <span style="color:#f92672">=</span> CrequestMiddleware<span style="color:#f92672">.</span>get_request()
+        current_user <span style="color:#f92672">=</span> getattr(current_request, <span style="color:#e6db74">&#34;user&#34;</span>, None)
+        <span style="color:#75715e"># Apply any filtering logic here using results + current_user</span>
+        <span style="color:#66d9ef">return</span> filtered_results
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Appointment</span>(models<span style="color:#f92672">.</span>Model):
+    objects <span style="color:#f92672">=</span> PermissionManager()
+    <span style="color:#f92672">...</span></code></pre></div>
+<p>You can of course create an abstraction/interface class now that implements permissions depending on your underlying schema.
+For example you may have a state, system or permission assigned to models regardless of their content_type.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There are probably hundreds of ways to do the same thing, let me know if you have a better approach or if there are gaps in ours!</p>
+</div>
+  
+</article></main>
+<footer class="footer">
+  <span>&copy; 2021 <a href="/">nicknack.dev</a></span>
+  <span>&middot;</span>
+  <span>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</span>
+  <span>&middot;</span>
+  <span>Theme️ <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper</a></span>
+</footer>
+<script src="/highlight.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>
+

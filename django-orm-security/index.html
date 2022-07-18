@@ -17,7 +17,7 @@ Making sure the right people have access to your data is crucial in this day and
     
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="icon" href="/favicon.ico">
-    <meta name="generator" content="Hugo 0.69.0" />
+    <meta name="generator" content="Hugo 0.101.0" />
     
     
   </head>
@@ -48,23 +48,23 @@ This exposed some problems, in traditional REST (or django views or <a href="htt
 This flexible layer is great for development but not great for security.</p>
 <h2 id="using-decorators">Using Decorators</h2>
 <p>The easy approach is to decorate any resolvers in Graphene.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
-    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()</span></span></code></pre></div></p>
 <p>However, what if doctors can only access appointments in their state?
 I&rsquo;ll simplify the access pattern.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
-    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)</span></span></code></pre></div>
 <p>Okay we have now protected our appointments resolver&hellip; in one place.
 A few months from then a developer comes along and adds a resolver for an individual appointment.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
-    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)
-
-<span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointment</span>(context, id):
-    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>id)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointments</span>(context):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(state<span style="color:#f92672">=</span>context<span style="color:#f92672">.</span>user<span style="color:#f92672">.</span>state)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@only_roles</span>(<span style="color:#e6db74">&#39;DOCTOR&#39;</span>, <span style="color:#e6db74">&#39;NURSE&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">resolve_appointment</span>(context, id):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Appointment<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>id)</span></span></code></pre></div>
 <p>Our doctor and nurse roles can now access any appointment provided they know the identifier.</p>
 <h2 id="using-the-orm">Using the ORM</h2>
 <p>Django exposes a few functions that we can play with to override resulting sets.
@@ -76,20 +76,20 @@ Overriding at this lower level gives us a few benefits:</p>
 <h3 id="how-does-it-work">How does it work?</h3>
 <p>We use the <a href="https://pypi.org/project/django-crequest/"><code>django-crequest</code></a> library which gives us access to the requesting user which is abstracted away by the time you get to the ORM.
 We then override <code>get_queryset</code> to inject our own filtering logic before the ORM can return objects.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> crequest.middleware <span style="color:#f92672">import</span> CrequestMiddleware
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PermissionManager</span>(models<span style="color:#f92672">.</span>Manager):
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
-        results <span style="color:#f92672">=</span> super()<span style="color:#f92672">.</span>get_queryset()
-        current_request <span style="color:#f92672">=</span> CrequestMiddleware<span style="color:#f92672">.</span>get_request()
-        current_user <span style="color:#f92672">=</span> getattr(current_request, <span style="color:#e6db74">&#34;user&#34;</span>, None)
-        <span style="color:#75715e"># Apply any filtering logic here using results + current_user</span>
-        <span style="color:#66d9ef">return</span> filtered_results
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Appointment</span>(models<span style="color:#f92672">.</span>Model):
-    objects <span style="color:#f92672">=</span> PermissionManager()
-    <span style="color:#f92672">...</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> crequest.middleware <span style="color:#f92672">import</span> CrequestMiddleware
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PermissionManager</span>(models<span style="color:#f92672">.</span>Manager):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_queryset</span>(self):
+</span></span><span style="display:flex;"><span>        results <span style="color:#f92672">=</span> super()<span style="color:#f92672">.</span>get_queryset()
+</span></span><span style="display:flex;"><span>        current_request <span style="color:#f92672">=</span> CrequestMiddleware<span style="color:#f92672">.</span>get_request()
+</span></span><span style="display:flex;"><span>        current_user <span style="color:#f92672">=</span> getattr(current_request, <span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Apply any filtering logic here using results + current_user</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> filtered_results
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Appointment</span>(models<span style="color:#f92672">.</span>Model):
+</span></span><span style="display:flex;"><span>    objects <span style="color:#f92672">=</span> PermissionManager()
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span></span></span></code></pre></div>
 <p>You can of course create an abstraction/interface class now that implements permissions depending on your underlying schema.
 For example you may have a state, system or permission assigned to models regardless of their content_type.</p>
 <h2 id="conclusion">Conclusion</h2>
@@ -98,7 +98,7 @@ For example you may have a state, system or permission assigned to models regard
   
 </article></main>
 <footer class="footer">
-  <span>&copy; 2021 <a href="/">nicknack.dev</a></span>
+  <span>&copy; 2022 <a href="/">nicknack.dev</a></span>
   <span>&middot;</span>
   <span>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</span>
   <span>&middot;</span>

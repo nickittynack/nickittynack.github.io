@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Microservices</title>
+      <link>/microservices/</link>
+      <pubDate>Tue, 19 Jul 2022 08:00:00 +1100</pubDate>
+      
+      <guid>/microservices/</guid>
+      <description>Ramblings on Microservices and Monoliths Our main application is a monolithic beast, covering multiple distinct user flows, with very little UI cross over. I recently tasked one of our squads which was about to build yet another user flow into the application to do a tech spike into how it should be structured - packages, folders, microservices - what’s our way forward?
+But what are the actual problems we are trying to address here?</description>
+    </item>
+    
+    <item>
       <title>Protecting Django Models</title>
       <link>/django-orm-security/</link>
       <pubDate>Sat, 03 Apr 2021 19:18:22 +1100</pubDate>

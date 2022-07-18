@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Microservices - nicknack.dev</title>
+    
+    <meta name="description" content="Ramblings on Microservices and Monoliths Our main application is a monolithic beast, covering multiple distinct user flows, with very little UI cross over. I recently tasked one of our squads which was about to build yet another user flow into the application to do a tech spike into how it should be structured - packages, folders, microservices - what’s our way forward?
+But what are the actual problems we are trying to address here?">
+    <meta name="author" content="">
+    
+    <link href="/an-old-hope.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+    <link href="/custom.css" rel="stylesheet">
+    
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="generator" content="Hugo 0.101.0" />
+    
+    
+  </head>
+  <body class="single dark">
+    <header class="header">
+      <nav class="nav">
+        <div class="hero"></div>
+        <p class="logo"><a href="/">nicknack.dev</a></p>
+        <ul class="menu">
+          <li>
+            <a href="/about/">About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main">
+
+
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">Microservices</h1>
+    <div class="post-meta">July 19, 2022</div>
+  </header>
+  <div class="post-content"><h1 id="ramblings-on-microservices-and-monoliths">Ramblings on Microservices and Monoliths</h1>
+<p>Our main application is a monolithic beast, covering multiple distinct user flows, with very little UI cross over. I recently tasked one of our squads which was about to build yet another user flow into the application to do a tech spike into how it should be structured - packages, folders, microservices - what’s our way forward?</p>
+<p>But what are the actual problems we are trying to address here? Keen engineers are very quick to suggest things like “microservices architectures” as the way forward - from my perspective <em>here be dragons</em>.</p>
+<ul>
+<li>By splitting into microservices are we actually addressing any issues we currently have?</li>
+<li>By splitting into microservices are we now creating more issues that we didn’t have? Network calls? Dependency hell?</li>
+</ul>
+<p>Why do people want to jump into microservices? From my reading and experience people see it has the hot trend in tech or see it as a way to further their skills in potentially new areas like k8s to orchestrate their microservices. The other aspect could be the tendency for us engineers to say “let’s rewrite this / start from scratch / green fields. After all, in a project that’s been going on a few years there’s been lots of chefs across the codebase.</p>
+<p>Popping back up the topic stack <strong>what problem are we addressing?</strong></p>
+<p>The main issues we have in my eyes:</p>
+<ul>
+<li>Release coordination across the monolith - every user flow has a different product owner who needs to sign off on the release</li>
+<li>Cognitive overhead - the codebase is large and sprawling, it is non trivial to find backend or front end components for specific product flows. If a stack trace is thrown - do we know what product it is for?</li>
+<li>Cypress testing speed - currently on commit our cypress suite runs, this takes around 20mins for the entire thing to run in parallel</li>
+</ul>
+<p>From these points I can deduce a few requirements for any architectural / solution design changes:</p>
+<p>Clear separation of concerns - areas of the code base that can have CODEOWNERS assigned, better folder structures that dictate what’s where - how to find relevant files. Decouple as much as reasonable, shared functions or components should be obviously shared - but items for specific flows should be split out.</p>
+<p>For example product flow X should not be able to directly access product flow Ys database to compute items. That should be done via a function call that can be typed and tested. If these were microservices they would be abstracted behind a REST API and a cheeky network call - but we don’t need a micro service to maintain clear separation.</p>
+<p>Around releases, this should only be necessary for something major, minor small features should be shippable daily/weekly if they aren’t then they should be feature toggled.. releases shouldn’t have to wait for everyone.</p>
+<p>If we can’t do this than our feature branches are too big, or too interweaved… signs of features being difficult to maintain and sprawled across different files. We’re never going to get to a point where we ship features globally if so much overhead is required for a release or a new feature.</p>
+<p>Cypress testing with feature switches enabled
+… these should be done via proper feature switches in something like launch darkly. Which can automatically switch features in an environment. That also promotes visibility of features, testing by non technical team members.</p>
+<p>That’s where my head is currently at.</p>
+</div>
+  
+</article></main>
+<footer class="footer">
+  <span>&copy; 2022 <a href="/">nicknack.dev</a></span>
+  <span>&middot;</span>
+  <span>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</span>
+  <span>&middot;</span>
+  <span>Theme️ <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper</a></span>
+</footer>
+<script src="/highlight.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>
+
